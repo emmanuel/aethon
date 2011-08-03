@@ -1,0 +1,20 @@
+There are several options for driving Solr from Ruby: rsolr, delsolr and sunspot
+(which is a significant layer of syntactic sugar on top or rsolr's fairly raw interface).
+
+Each has advantages and disadvantages:
+
+1) rsolr provides a fairly raw (low-level) interface,
+and it does not seem to be encoding-aware (w/r/t Ruby 1.9's Encoding support).
+2) delsolr provides a midlevel interface, including batching of documents posted to Solr.
+3) sunspot provides a very high-level interface, including DSLs for both indexing and
+querying Solr. It also includes ORM interface code (esp. ActiveRecord), for making
+the the task of indexing and querying data the mirrors an RDBMS more straightforward.
+
+Why another Ruby Solr lib?
+
+Quite simply, I don't find the internals of any of the listed options to be satisfactory.
+Some might argue that the better thing would be for me to invest my energy in refining one
+of the existing options to meet my goals.
+
+To them I refer to the principle of Schumpeterian creative destruction. Alternately—
+evolution of a species proceeds more rapidly between specimens than within them.
