@@ -13,8 +13,9 @@ the the task of indexing and querying data the mirrors an RDBMS more straightfor
 Why another Ruby Solr lib?
 
 Quite simply, I don't find the internals of any of the listed options to be satisfactory.
-Some might argue that the better thing would be for me to invest my energy in refining one
-of the existing options to meet my goals.
 
-To them I refer to the principle of Schumpeterian creative destruction. Alternately—
-evolution of a species proceeds more rapidly between specimens than within them.
+
+Some might argue that the better thing would be for me to invest my energy in refining one
+of the existing options to meet my goals. To them I refer to the principle of Schumpeterian
+creative destruction. Alternately — evolution of a species proceeds more rapidly between
+specimens than within them.
