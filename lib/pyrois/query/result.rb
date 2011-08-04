@@ -1,21 +1,24 @@
 module Pyrois
   class Query
     class Result
+      include Virtus
 
       attr_reader :result_set
       attr_reader :content
 
-      def initialize(result_set, content)
+      attribute :id,    String
+      attribute :score, Float
+
+
+      def initialize(result_set, raw_result, logger = Pyrois.logger)
         @result_set = result_set
-        @content    = content
-      end
+        @raw_result = raw_result
+        @logger     = logger
 
-      def id
-        content.fetch('id', '')
-      end
-
-      def score
-        content.fetch('score', '')
+        # TODO: pass raw_result through a mapper in order to turn Solr
+        # dynamic field suffixes (*_text, *_s, *_sm, *_i, *_d, *_b, etc)
+        # into unsuffixed attribute declarations of the appropriate type
+        super(raw_result)
       end
 
       def match_percentage
@@ -27,22 +30,25 @@ module Pyrois
       end
 
       def to_s
-        %Q{<#{self.class} score=#{score} id="#{id}">}
+        %Q{<#{self.class} id="#{id}" score=#{score}>}
       end
 
       alias_method :inspect, :to_s
 
     private
 
-      def method_missing(method, *args, &block)
-        if content.include?(method.to_s)
-          result_set.define_dynamic_method do
-            content.fetch(method, '')
-          end
-        else
-          super
-        end
-      end
+      # See TODO note in #initialize
+      # 
+      # def method_missing(method, *args, &block)
+      #   attr_name = method.to_s.chomp("=")
+      #   if raw_result.include?(attr_name)
+      #     logger.debug "Adding attribute to #{self.class}: #{attr_name}"
+      #     self.class.attribute attr_name, String
+      #     self[attr_name] = args.first
+      #   else
+      #     super
+      #   end
+      # end
 
     end # class Result
   end # class Query

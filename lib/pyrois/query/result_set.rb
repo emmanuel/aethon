@@ -7,14 +7,15 @@ module Pyrois
 
       attr_reader :raw_results
       attr_accessor :result_factory
+      attr_accessor :logger
 
-      def initialize(raw_results, result_factory = Pyrois.default_result_factory)
+      def initialize(raw_results, result_factory = Pyrois.default_result_factory, logger = Pyrois.logger)
         @raw_results    = raw_results
         @result_factory = Class.new(result_factory)
+        @logger         = logger
+
         @results        = []
         @instantiated   = false
-
-        result_factory.module_eval { include dynamic_methods_module }
       end
 
       def each
@@ -37,7 +38,7 @@ module Pyrois
         return self if instantiated?
 
         raw_results.each do |raw_result|
-          result = result_factory.new(self, raw_result)
+          result = result_factory.new(self, raw_result, logger)
           @results << result
           yield result if block_given?
         end
@@ -58,17 +59,6 @@ module Pyrois
 
       def instantiated!
         @instantiated = true
-      end
-
-      def define_dynamic_method(&block)
-        dynamic_methods_module.module_eval do
-          define_method(method, &block)
-          public method
-        end
-      end
-
-      def dynamic_methods_module
-        @dynamic_methods_module ||= Module.new
       end
 
     end # class ResultSet
