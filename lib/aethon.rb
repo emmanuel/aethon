@@ -45,7 +45,7 @@ module Aethon
   end
 
   def client
-    @client ||= connection ? Client.new(connection, default_query_options, logger) : nil
+    @client ||= connection ? Client.new(connection, default_query_options, :logger => logger) : nil
   end
 
 end

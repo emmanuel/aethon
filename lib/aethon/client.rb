@@ -19,8 +19,10 @@ module Aethon
     end
 
     def query(query_string)
-      options = { :result_factory => result_factory, :logger => logger }
-      query_factory.new(self, query_string, options)
+      query_factory.new(self, query_string, {
+        :result_factory => result_factory,
+        :logger         => logger
+      })
     end
 
     def select(search_params)

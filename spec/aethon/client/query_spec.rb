@@ -19,11 +19,9 @@ describe Aethon::Client do
       { :query_factory => @query_factory }
     end
 
-    it "calls query_factory.new with self, query_string, and result_factory" do
+    it "calls query_factory.new with self, query_string, and options" do
       client = self.client
       @connection.expect :url, "http://foo"
-      # @result_factory.expect :inspect, :return_value
-      # assert client.query_factory.eql?(@query_factory)
       expected_options = { :result_factory => Aethon::Query::Result, :logger => client.logger }
       @query_factory.expect :new, :return_value, [ client, @query_string, expected_options ]
 
