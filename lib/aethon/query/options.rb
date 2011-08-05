@@ -1,4 +1,4 @@
-module Pyrois
+module Aethon
   class Query
     class Options
       attr_reader :field_list
@@ -42,4 +42,4 @@ module Pyrois
 
     end # class Options
   end # class Query
-end # module Pyrois
+end # module Aethon

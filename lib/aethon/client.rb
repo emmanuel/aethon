@@ -1,13 +1,13 @@
-require 'pyrois'
+require 'aethon'
 
-module Pyrois
+module Aethon
   class Client
 
     attr_accessor :connection
     attr_accessor :query_options
     attr_accessor :logger
 
-    def initialize(connection, query_options = {}, result_factory = Pyrois.default_result_factory, logger = Pyrois.logger)
+    def initialize(connection, query_options = {}, result_factory = Aethon.default_result_factory, logger = Aethon.logger)
       @connection     = connection
       @query_options  = query_options
       @result_factory = result_factory

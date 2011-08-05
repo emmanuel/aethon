@@ -1,4 +1,4 @@
-module Pyrois
+module Aethon
   class Query
     class Result
       include Virtus
@@ -10,7 +10,7 @@ module Pyrois
       attribute :score, Float
 
 
-      def initialize(result_set, raw_result, logger = Pyrois.logger)
+      def initialize(result_set, raw_result, logger = Aethon.logger)
         @result_set = result_set
         @raw_result = raw_result
         @logger     = logger
@@ -52,4 +52,4 @@ module Pyrois
 
     end # class Result
   end # class Query
-end # module Pyrois
+end # module Aethon

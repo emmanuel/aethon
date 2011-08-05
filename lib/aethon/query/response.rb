@@ -1,7 +1,7 @@
-require 'pyrois'
-require 'pyrois/query/result_set'
+require 'aethon'
+require 'aethon/query/result_set'
 
-module Pyrois
+module Aethon
   class Query
     class Response
       include Enumerable
@@ -9,7 +9,7 @@ module Pyrois
       attr_reader :response
       attr_reader :results
 
-      def initialize(response, result_factory = Pyrois.default_result_factory)
+      def initialize(response, result_factory = Aethon.default_result_factory)
         @response       = response
         @result_factory = result_factory
       end
@@ -74,4 +74,4 @@ module Pyrois
 
     end # class Response
   end # class Query
-end # module Pyrois
+end # module Aethon

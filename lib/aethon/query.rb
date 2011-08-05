@@ -1,6 +1,6 @@
-require 'pyrois'
+require 'aethon'
 
-module Pyrois
+module Aethon
   class Query
     include Enumerable
 
@@ -10,7 +10,7 @@ module Pyrois
 
     attr_accessor :field_list
 
-    def initialize(client, query_string, options = {}, result_factory = Pyrois.default_result_factory, logger = Pyrois.logger)
+    def initialize(client, query_string, options = {}, result_factory = Aethon.default_result_factory, logger = Aethon.logger)
       @client         = client
       @query          = query_string
       @options        = Query::Options.new(options)
@@ -54,6 +54,6 @@ module Pyrois
     end
 
   end # class Query
-end # module Pyrois
+end # module Aethon
 
-require 'pyrois/query/response'
+require 'aethon/query/response'

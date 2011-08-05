@@ -1,17 +1,17 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "pyrois/version"
+require "aethon/version"
 
 Gem::Specification.new do |s|
-  s.name        = "pyrois"
-  s.version     = Pyrois::VERSION
+  s.name        = "aethon"
+  s.version     = Aethon::VERSION
   s.authors     = ["Emmanuel Gomez"]
   s.email       = ["emmanuel.gomez@gmail.com"]
-  s.homepage    = "http://github.com/emmanuel/pyrois"
-  s.summary     = %q{Pyrois—Steed of Helios that pulls the sun (Solr) across the sky}
-  s.description = %q{Pyrois is a client library for interacting with Apache Solr.}
+  s.homepage    = "http://github.com/emmanuel/aethon"
+  s.summary     = %q{Aethon—Steed of Helios that pulls the sun (Solr) across the sky}
+  s.description = %q{Aethon is a client library for interacting with Apache Solr.}
 
-  # s.rubyforge_project = "pyrois"
+  # s.rubyforge_project = "aethon"
 
   s.add_runtime_dependency(%q<virtus>,        ["~> 0.0.7"])
   s.add_runtime_dependency(%q<rsolr>,         ["~> 1.0"])

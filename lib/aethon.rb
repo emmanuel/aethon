@@ -1,8 +1,8 @@
 require 'stringio'
 require 'rsolr'
-require 'pyrois/version'
+require 'aethon/version'
 
-module Pyrois
+module Aethon
   extend self
 
   attr_accessor :logger

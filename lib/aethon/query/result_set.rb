@@ -1,6 +1,6 @@
-require 'pyrois'
+require 'aethon'
 
-module Pyrois
+module Aethon
   class Query
     class ResultSet
       include Enumerable
@@ -9,7 +9,7 @@ module Pyrois
       attr_accessor :result_factory
       attr_accessor :logger
 
-      def initialize(raw_results, result_factory = Pyrois.default_result_factory, logger = Pyrois.logger)
+      def initialize(raw_results, result_factory = Aethon.default_result_factory, logger = Aethon.logger)
         @raw_results    = raw_results
         @result_factory = Class.new(result_factory)
         @logger         = logger
@@ -63,4 +63,4 @@ module Pyrois
 
     end # class ResultSet
   end # class Query
-end # module Pyrois
+end # module Aethon
