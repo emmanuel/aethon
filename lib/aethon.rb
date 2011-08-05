@@ -8,10 +8,15 @@ module Aethon
   attr_accessor :logger
   attr_accessor :solr_url
   attr_accessor :default_query_options
-  attr_accessor :default_result_factory
+
+  attr_writer :default_query_factory
+  attr_writer :default_response_factory
+  attr_writer :default_result_factory
 
   attr_writer :connection
   attr_writer :client
+
+  self.logger = StringIO.new("")
 
   self.default_query_options = {
     :field_list     => "*,score",
@@ -22,6 +27,18 @@ module Aethon
     :limit          => 30,
   }
 
+  def default_query_factory
+    @default_query_factory ||= Query
+  end
+
+  def default_response_factory
+    @default_response_factory ||= Query::Response
+  end
+
+  def default_result_factory
+    @default_result_factory ||= Query::Result
+  end
+
   # TODO: eliminate rsolr dependency
   def connection
     @connection ||= solr_url ? RSolr.connect(:url => solr_url) : nil
@@ -31,6 +48,11 @@ module Aethon
     @client ||= connection ? Client.new(connection, default_query_options, logger) : nil
   end
 
-  self.logger = StringIO.new("")
-
 end
+
+require 'aethon/client'
+require 'aethon/query'
+require 'aethon/query/options'
+require 'aethon/query/response'
+require 'aethon/query/result_set'
+require 'aethon/query/result'

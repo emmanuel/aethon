@@ -3,19 +3,23 @@ require 'aethon'
 module Aethon
   class Client
 
-    attr_accessor :connection
-    attr_accessor :query_options
+    attr_reader :connection
+    attr_reader :query_options
+    attr_reader :query_factory
+    attr_reader :result_factory
     attr_accessor :logger
 
-    def initialize(connection, query_options = {}, result_factory = Aethon.default_result_factory, logger = Aethon.logger)
+    def initialize(connection, query_options = {}, options = {})
       @connection     = connection
       @query_options  = query_options
-      @result_factory = result_factory
-      @logger         = logger
+
+      @query_factory  = options.fetch(:query_factory,  Aethon.default_query_factory)
+      @result_factory = options.fetch(:result_factory, Aethon.default_result_factory)
+      @logger         = options.fetch(:logger,         Aethon.logger)
     end
 
     def query(query_string)
-      Query.new(self, query_string, query_options, result_factory)
+      query_factory.new(self, query_string, query_options, result_factory)
     end
 
     def select(search_params)

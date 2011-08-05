@@ -9,10 +9,11 @@ module Aethon
       attr_accessor :result_factory
       attr_accessor :logger
 
-      def initialize(raw_results, result_factory = Aethon.default_result_factory, logger = Aethon.logger)
+      def initialize(raw_results, options = {})
         @raw_results    = raw_results
+        result_factory  = options.fetch(:result_factory, Aethon.default_result_factory)
         @result_factory = Class.new(result_factory)
-        @logger         = logger
+        @logger         = options.fetch(:logger,         Aethon.logger)
 
         @results        = []
         @instantiated   = false

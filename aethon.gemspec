@@ -8,12 +8,13 @@ Gem::Specification.new do |s|
   s.authors     = ["Emmanuel Gomez"]
   s.email       = ["emmanuel.gomez@gmail.com"]
   s.homepage    = "http://github.com/emmanuel/aethon"
-  s.summary     = %q{Aethon—Steed of Helios that pulls the sun (Solr) across the sky}
-  s.description = %q{Aethon is a client library for interacting with Apache Solr.}
+  s.summary     = %q{Aethon is a client library for interacting with Apache Solr.}
+  s.description = %q{One of the steeds of Helios that pulls the sun (Solr) across the sky.}
 
   # s.rubyforge_project = "aethon"
 
   s.add_runtime_dependency(%q<virtus>,        ["~> 0.0.7"])
+  s.add_runtime_dependency(%q<backports>)
   s.add_runtime_dependency(%q<rsolr>,         ["~> 1.0"])
   s.add_runtime_dependency(%q<activesupport>, ["~> 3"])
 

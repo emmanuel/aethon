@@ -1,3 +1,6 @@
+require 'backports'
+require 'virtus'
+
 module Aethon
   class Query
     class Result
@@ -10,10 +13,10 @@ module Aethon
       attribute :score, Float
 
 
-      def initialize(result_set, raw_result, logger = Aethon.logger)
+      def initialize(result_set, raw_result, options = {})
         @result_set = result_set
         @raw_result = raw_result
-        @logger     = logger
+        @logger     = options.fetch(:logger, Aethon.logger)
 
         # TODO: pass raw_result through a mapper in order to turn Solr
         # dynamic field suffixes (*_text, *_s, *_sm, *_i, *_d, *_b, etc)

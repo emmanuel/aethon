@@ -7,11 +7,17 @@ module Aethon
       include Enumerable
 
       attr_reader :response
+      attr_reader :result_set_factory
+      attr_reader :result_factory
       attr_reader :results
+      attr_reader :logger
 
-      def initialize(response, result_factory = Aethon.default_result_factory)
-        @response       = response
-        @result_factory = result_factory
+      def initialize(response, options = {})
+        @response           = response
+        @result_set_factory = options.fetch(:result_set_factory, Aethon.default_result_set_factory)
+        @result_factory     = options.fetch(:result_factory,     Aethon.default_result_factory)
+        @logger             = options.fetch(:logger,             Aethon.logger)
+        @results            = nil
       end
 
       def each
@@ -21,7 +27,7 @@ module Aethon
       end
 
       def results
-        @results ||= Query::ResultSet.new(raw_results, result_factory)
+        @results ||= result_set_factory.new(raw_results, result_factory)
       end
 
       def result_count
