@@ -12,16 +12,16 @@ module Aethon
 
     attr_accessor :field_list
 
-    def initialize(client, query_string, query_options = {}, options = {})
+    def initialize(client, query_string, options = {})
       @client  = client
       @query   = query_string
-      @options = Query::Options.new(query_options)
+      @options = Query::Options.new(client.query_options)
 
       @response_factory = options.fetch(:response_factory, Aethon.default_response_factory)
       @result_factory   = options.fetch(:result_factory,   Aethon.default_result_factory)
       @logger           = options.fetch(:logger,           Aethon.logger)
 
-      @response     = nil
+      @response = nil
     end
 
     def each
