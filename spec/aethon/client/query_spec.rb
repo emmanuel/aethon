@@ -2,8 +2,10 @@ require File.expand_path('../../../spec_helper', __FILE__)
 require 'aethon'
 
 describe Aethon::Client do
-  def query_options; {}; end
-  def options;       {}; end
+  # def query_options; {}; end
+  # def options;       {}; end
+  let(:query_options) { Hash.new }
+  let(:options)       { Hash.new }
   def client; Aethon::Client.new(@connection, query_options, options); end
 
   before { @connection = MiniTest::Mock.new }
