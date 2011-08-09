@@ -19,10 +19,11 @@ module Aethon
         Virtus::Attribute::Float       => "f",
         # TODO: How to deal with multi-valued String, Integer, Float, etc
         # Perhaps implement them as custom Virtus::Attribute subclasses? ex:
-        # Virtus::Attribute::StringArray => "sm",
+        # Aethon::Attribute::StringArray => "sm",
+        # Aethon::Attribute::MultiString => "sm",
         # TODO: How to deal with TrieDateField, TrieStringField, etc.
         # Perhaps implement them as custom Virtus::Attribute subclasses? ex:
-        # Virtus::Attribute::TrieStringField => "sm",
+        # Aethon::Attribute::TrieString => "strie",
       }
       SUFFIXES = TYPES.invert
 

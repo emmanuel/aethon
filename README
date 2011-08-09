@@ -12,10 +12,34 @@ the the task of indexing and querying data the mirrors an RDBMS more straightfor
 
 Why another Ruby Solr lib?
 
-Quite simply, I don't find the internals of any of the listed options to be satisfactory.
 
+Quite simply, I don't find the internals of any of the listed options to be satisfactory.
 
 Some might argue that the better thing would be for me to invest my energy in refining one
 of the existing options to meet my goals. To them I refer to the principle of Schumpeterian
 creative destruction. Alternately — evolution of a species proceeds more rapidly between
 specimens than within them.
+
+
+class User < ActiveRecord::Base
+  searchable do
+    index :name,        Soundex, :stored => true
+    index(:friend_ids,  Integer, :multivalued => true) { friend_ids }
+
+  end
+end
+
+OR:
+
+class User
+  include DataMapper::Resource
+
+  searchable do
+    index :name,        Soundex, :stored => true, :query_boost => 1.5
+    # TODO: which of these options is better?
+    index(:friend_ids,  IntegerArray)                  { friend_ids }
+    index(:friend_ids,  Array,   :of => Integer)       { friend_ids }
+    index(:friend_ids,  Integer, :multivalued => true) { friend_ids }
+
+  end
+end
