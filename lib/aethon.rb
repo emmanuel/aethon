@@ -1,3 +1,4 @@
+require 'logger'
 require 'stringio'
 require 'rsolr'
 require 'aethon/version'
@@ -16,7 +17,7 @@ module Aethon
   attr_writer :connection
   attr_writer :client
 
-  self.logger = StringIO.new("")
+  self.logger = Logger.new(StringIO.new(""))
 
   self.default_query_options = {
     :field_list     => "*,score",

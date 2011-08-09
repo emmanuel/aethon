@@ -1,35 +1,28 @@
 require File.expand_path('../../../spec_helper', __FILE__)
-require 'aethon'
 
-describe Aethon::Client do
-  # def query_options; {}; end
-  # def options;       {}; end
+describe Aethon::Client, '#query' do
+  let(:connection)    { MiniTest::Mock.new }
   let(:query_options) { Hash.new }
   let(:options)       { Hash.new }
-  def client; Aethon::Client.new(@connection, query_options, options); end
+  let(:client)        { Aethon::Client.new(connection, query_options, options) }
 
-  before { @connection = MiniTest::Mock.new }
+  subject { client.query(query_string) }
 
   describe 'when query is "foo"' do
-    before do
-      @query_string   = "foo"
-      @query_factory  = MiniTest::Mock.new
-      # @result_factory = MiniTest::Mock.new
+    let(:query_string)  { 'foo' }
+    let(:query_factory) { MiniTest::Mock.new }
+    let(:options)       { { :query_factory => query_factory } }
+    let(:expected_options) do
+      { :result_factory => Aethon::Query::Result, :logger => Aethon.logger }
     end
 
-    def options
-      { :query_factory => @query_factory }
-    end
+    it 'calls query_factory.new with self, query_string, and options' do
+      connection.expect :url, 'http://foo'
+      query_factory.expect :new, :return_value, [ client, query_string, expected_options ]
 
-    it "calls query_factory.new with self, query_string, and options" do
-      client = self.client
-      @connection.expect :url, "http://foo"
-      expected_options = { :result_factory => Aethon::Query::Result, :logger => client.logger }
-      @query_factory.expect :new, :return_value, [ client, @query_string, expected_options ]
+      subject
 
-      client.query(@query_string)
-
-      @query_factory.verify
+      query_factory.verify
     end
   end
 

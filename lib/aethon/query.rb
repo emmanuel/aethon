@@ -1,4 +1,5 @@
 require 'aethon'
+require 'aethon/query/response'
 
 module Aethon
   class Query
@@ -63,5 +64,3 @@ module Aethon
 
   end # class Query
 end # module Aethon
-
-require 'aethon/query/response'

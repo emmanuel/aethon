@@ -1,19 +1,17 @@
 require File.expand_path('../../../../spec_helper', __FILE__)
 require 'aethon'
 
-describe Aethon::Query::Options do
-  def options; {}; end
-  def other;   {}; end
+describe Aethon::Query::Options, '#merge' do
+  let(:options) { Hash.new }
+  let(:other)   { Hash.new }
 
-  before do
-    @subject = Aethon::Query::Options.new(options).merge(other)
-  end
+  subject { Aethon::Query::Options.new(options).merge(other) }
 
   describe 'when :field_list key is present' do
-    def options; { :field_list => "*" } end
+    let(:options) { { :field_list => "*" } }
 
     it "includes :fl key" do
-      @subject.must_equal(:fl => "*")
+      subject.must_equal(:fl => "*")
     end
   end
 
